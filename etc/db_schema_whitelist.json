@@ -1,0 +1,52 @@
+{
+    "salesrule": {
+        "column": {
+            "magenable_coupon_validity_days": true
+        }
+    },
+    "magenable_coupon_expiry": {
+        "column": {
+            "coupon_id": true,
+            "issued_at": true,
+            "validity_days_at_issue": true,
+            "rolling_expires_at": true,
+            "issuance_source": true
+        },
+        "index": {
+            "MAGENABLE_COUPON_EXPIRY_ROLLING_EXPIRES_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENABLE_COUPON_EXPIRY_COUPON_ID_SALESRULE_COUPON_COUPON_ID": true
+        }
+    },
+    "magenable_coupon_expiry_request": {
+        "column": {
+            "request_entity_id": true,
+            "principal_type": true,
+            "principal_id": true,
+            "request_id": true,
+            "store_id": true,
+            "rule_id": true,
+            "payload_hash": true,
+            "coupon_id": true,
+            "created_at": true
+        },
+        "index": {
+            "MAGENABLE_COUPON_EXPIRY_REQUEST_PRINCIPAL_REQUEST": true,
+            "MAGENABLE_COUPON_EXPIRY_REQUEST_COUPON_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENABLE_COUPON_EXPIRY_REQUEST_PRINCIPAL_REQUEST": true,
+            "UNQ_1971114874D97E7FC5712A03FD33BF68": true
+        }
+    },
+    "quote": {
+        "column": {
+            "magenable_coupon_expiry_review_required": true,
+            "magenable_expired_coupon_code": true,
+            "magenable_expired_coupon_rule_id": true
+        }
+    }
+}

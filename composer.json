@@ -1,0 +1,41 @@
+{
+  "name": "magenable/module-coupon-expiry",
+  "description": "Rolling per-coupon expiry for generated Magento cart price rule coupons",
+  "version": "1.0.4",
+  "type": "magento2-module",
+  "license": "MIT",
+  "keywords": [
+    "adobe-commerce",
+    "coupon",
+    "expiry",
+    "magento2",
+    "mage-os",
+    "sales-rule"
+  ],
+  "homepage": "https://github.com/magenable/module-coupon-expiry",
+  "support": {
+    "issues": "https://github.com/magenable/module-coupon-expiry/issues",
+    "source": "https://github.com/magenable/module-coupon-expiry"
+  },
+  "require": {
+    "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+    "magento/framework": "^103.0.7",
+    "magento/framework-message-queue": "^100.4.7",
+    "magento/module-authorization": "^100.4.7",
+    "magento/module-backend": "^102.0.7",
+    "magento/module-checkout": "^100.4.7",
+    "magento/module-quote": "^101.2.7",
+    "magento/module-quote-graph-ql": "^100.4.7",
+    "magento/module-sales-rule": "^101.2.7",
+    "magento/module-store": "^101.1.7",
+    "magento/module-webapi": "^100.4.6"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magenable\\CouponExpiry\\": ""
+    }
+  }
+}

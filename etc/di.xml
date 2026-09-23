@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magenable\CouponExpiry\Model\Clock\UtcClockInterface" type="Magenable\CouponExpiry\Model\Clock\SystemUtcClock"/>
+    <preference for="Magenable\CouponExpiry\Api\Data\IssueRequestInterface" type="Magenable\CouponExpiry\Model\Data\IssueRequest"/>
+    <preference for="Magenable\CouponExpiry\Api\Data\CouponExpiryInterface" type="Magenable\CouponExpiry\Model\Data\CouponExpiry"/>
+    <preference for="Magenable\CouponExpiry\Api\Data\CouponExpirySearchResultsInterface" type="Magenable\CouponExpiry\Model\Data\CouponExpirySearchResults"/>
+    <preference for="Magenable\CouponExpiry\Api\CouponExpiryManagementInterface" type="Magenable\CouponExpiry\Model\CouponExpiryManagement"/>
+    <preference for="Magenable\CouponExpiry\Api\CouponExpiryRepositoryInterface" type="Magenable\CouponExpiry\Model\CouponExpiryRepository"/>
+    <type name="Magento\SalesRule\Model\Converter\ToModel">
+        <plugin name="magenable_coupon_expiry_rule_to_model" type="Magenable\CouponExpiry\Plugin\SalesRule\RuleToModelPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Converter\ToDataModel">
+        <plugin name="magenable_coupon_expiry_rule_to_data" type="Magenable\CouponExpiry\Plugin\SalesRule\RuleToDataModelPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\ResourceModel\Coupon">
+        <plugin name="magenable_coupon_expiry_coupon_save" type="Magenable\CouponExpiry\Plugin\SalesRule\CouponResourceSavePlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Framework\MessageQueue\Publisher">
+        <plugin name="magenable_coupon_expiry_generation_context_publisher" type="Magenable\CouponExpiry\Plugin\Queue\CouponGenerationPublisherPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Service\CouponManagementService">
+        <plugin name="magenable_coupon_expiry_generation_context" type="Magenable\CouponExpiry\Plugin\SalesRule\CouponManagementServicePlugin" sortOrder="5"/>
+    </type>
+    <type name="Magento\SalesRule\Model\ValidateCouponCode">
+        <plugin name="magenable_coupon_expiry_validate_codes" type="Magenable\CouponExpiry\Plugin\SalesRule\ValidateCouponCodePlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\ValidateCoupon">
+        <plugin name="magenable_coupon_expiry_validate_coupon" type="Magenable\CouponExpiry\Plugin\SalesRule\ValidateCouponPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Validator">
+        <plugin name="magenable_coupon_expiry_persist_review_marker" type="Magenable\CouponExpiry\Plugin\SalesRule\ValidatorPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\Index">
+        <plugin name="magenable_coupon_expiry_cart_notice" type="Magenable\CouponExpiry\Plugin\Checkout\CartIndexPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\SubmitQuoteValidator">
+        <plugin name="magenable_coupon_expiry_submit_guard" type="Magenable\CouponExpiry\Plugin\Quote\SubmitQuoteValidatorPlugin" sortOrder="5"/>
+    </type>
+    <type name="Magento\QuoteGraphQl\Model\OrderErrorProcessor">
+        <plugin name="magenable_coupon_expiry_graphql_order_error" type="Magenable\CouponExpiry\Plugin\GraphQl\OrderErrorProcessorPlugin" sortOrder="1"/>
+    </type>
+</config>

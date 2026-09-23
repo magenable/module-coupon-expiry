@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\SalesRule\Api\Data\RuleInterface">
+        <attribute code="magenable_coupon_validity_days" type="int"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\SalesRule\Api\Data\CouponGenerationSpecInterface">
+        <attribute code="magenable_store_id" type="int"/>
+        <attribute code="magenable_issuance_source" type="string"/>
+    </extension_attributes>
+</config>

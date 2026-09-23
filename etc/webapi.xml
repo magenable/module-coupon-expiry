@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/magenable/coupon-expiry/issue" method="POST"><service class="Magenable\CouponExpiry\Api\CouponExpiryManagementInterface" method="issue"/><resources><resource ref="Magenable_CouponExpiry::issue"/></resources></route>
+    <route url="/V1/magenable/coupon-expiry/coupons/:couponId" method="GET"><service class="Magenable\CouponExpiry\Api\CouponExpiryRepositoryInterface" method="getById"/><resources><resource ref="Magenable_CouponExpiry::read"/></resources></route>
+    <route url="/V1/magenable/coupon-expiry/coupons" method="GET"><service class="Magenable\CouponExpiry\Api\CouponExpiryRepositoryInterface" method="getList"/><resources><resource ref="Magenable_CouponExpiry::read"/></resources></route>
+</routes>

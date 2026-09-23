@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="rule_information">
+        <field name="magenable_coupon_validity_days" sortOrder="75" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array"><item name="source" xsi:type="string">sales_rule</item></item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Coupon validity (days)</label>
+                <notice translate="true">Each new auto-generated coupon expires this many 24-hour days after generation. Leave blank for no additional expiry. Existing coupons are unchanged.</notice>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                    <rule name="less-than-equals-to" xsi:type="number">3650</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

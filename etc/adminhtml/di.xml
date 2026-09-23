@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--
+        The native coupon grid is a legacy block and its export controllers create the
+        concrete block class directly. An admin-area-only preference keeps HTML, CSV,
+        and XML on one implementation without replacing a domain service globally.
+    -->
+    <preference for="Magento\SalesRule\Block\Adminhtml\Promo\Quote\Edit\Tab\Coupons\Grid"
+                type="Magenable\CouponExpiry\Block\Adminhtml\Promo\Quote\Edit\Tab\Coupons\Grid"/>
+</config>
