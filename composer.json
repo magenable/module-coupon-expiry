@@ -1,7 +1,7 @@
 {
   "name": "magenable/module-coupon-expiry",
   "description": "Rolling per-coupon expiry for generated Magento cart price rule coupons",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "magento2-module",
   "license": "MIT",
   "keywords": [

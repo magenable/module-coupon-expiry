@@ -12,6 +12,10 @@ All notable changes to Magenable CouponExpiry are documented here. Versions foll
 - Prepare release-only publication to `magenable/module-coupon-expiry` using a single-repository fine-grained token and clean tagged snapshots.
 - Add future-release synchronization of private `main` and immutable tags to GitLab through a dedicated write deploy key.
 
+## 1.0.5 — 2026-10-23
+
+- Tested with Magento v2.4.10-alpha1
+
 ## 1.0.4 — 2026-09-21
 
 ### Changed
