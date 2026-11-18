@@ -6,6 +6,7 @@ use Magenable\CouponExpiry\Model\IssuanceContext;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\State;
 use Magento\SalesRule\Api\Data\CouponGenerationSpecInterface;
+use Magento\SalesRule\Model\ResourceModel\Rule as RuleResource;
 use Magento\SalesRule\Model\RuleFactory;
 use Magento\SalesRule\Model\Service\CouponManagementService;
 use Magento\Store\Model\StoreManagerInterface;
@@ -19,7 +20,8 @@ class CouponManagementServicePlugin
         private readonly IssuanceContext $context,
         private readonly RuleFactory $ruleFactory,
         private readonly StoreManagerInterface $storeManager,
-        private readonly State $state
+        private readonly State $state,
+        private readonly RuleResource $ruleResource
     ) {
     }
 
@@ -35,7 +37,8 @@ class CouponManagementServicePlugin
         $storeId = $attributes?->getMagenableStoreId();
         $source = $attributes?->getMagenableIssuanceSource();
         $ruleId = (int)$couponSpec->getRuleId();
-        $rule = $this->ruleFactory->create()->load($ruleId);
+        $rule = $this->ruleFactory->create();
+        $this->ruleResource->load($rule, $ruleId);
         $rawDays = $rule->getData('magenable_coupon_validity_days');
         $validityDays = $rawDays === null || $rawDays === '' ? null : (int)$rawDays;
         $trustedAdminContext = $source === 'admin' && !$this->isApiExecution();

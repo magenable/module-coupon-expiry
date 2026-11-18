@@ -14,6 +14,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\SalesRule\Model\Coupon;
 use Magento\SalesRule\Model\Coupon\Codegenerator;
 use Magento\SalesRule\Model\CouponFactory;
+use Magento\SalesRule\Model\ResourceModel\Coupon as CouponResource;
+use Magento\SalesRule\Model\ResourceModel\Rule as RuleResource;
 use Magento\SalesRule\Model\Rule;
 use Magento\SalesRule\Model\RuleFactory;
 use Magento\Store\Model\StoreManagerInterface;
@@ -28,7 +30,9 @@ class CouponExpiryManagement implements CouponExpiryManagementInterface
         private readonly CouponFactory $couponFactory,
         private readonly Codegenerator $codegenerator,
         private readonly IssuanceContext $context,
-        private readonly CouponExpiryRepository $repository
+        private readonly CouponExpiryRepository $repository,
+        private readonly RuleResource $ruleResource,
+        private readonly CouponResource $couponResource
     ) {
     }
 
@@ -70,7 +74,8 @@ class CouponExpiryManagement implements CouponExpiryManagementInterface
                 return $item;
             }
             $requestEntityId = (int)$connection->lastInsertId($table);
-            $rule = $this->ruleFactory->create()->load($ruleId);
+            $rule = $this->ruleFactory->create();
+            $this->ruleResource->load($rule, $ruleId);
             $days = $this->validateRule($rule, (int)$store->getWebsiteId());
             $coupon = $this->createCoupon($ruleId, $storeId, $days);
             $connection->update($table, ['coupon_id' => (int)$coupon->getId()], ['request_entity_id = ?' => $requestEntityId]);
@@ -129,7 +134,7 @@ class CouponExpiryManagement implements CouponExpiryManagementInterface
                 $coupon = $this->couponFactory->create();
                 $coupon->setRuleId($ruleId)->setType(Coupon::TYPE_GENERATED)->setCode($this->codegenerator->generateCode());
                 try {
-                    $coupon->save();
+                    $this->couponResource->save($coupon);
                     return $coupon;
                 } catch (\Magento\Framework\Exception\AlreadyExistsException) {
                     continue;

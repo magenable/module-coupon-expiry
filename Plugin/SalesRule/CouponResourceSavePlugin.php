@@ -10,6 +10,7 @@ use Magenable\CouponExpiry\Model\IssuanceSourceResolver;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\SalesRule\Model\Coupon;
+use Magento\SalesRule\Model\ResourceModel\Rule as RuleResource;
 use Magento\SalesRule\Model\RuleFactory;
 use Magento\SalesRule\Model\ResourceModel\Coupon as CouponResource;
 
@@ -21,7 +22,8 @@ class CouponResourceSavePlugin
         private readonly ExpiryPolicy $policy,
         private readonly UtcClockInterface $clock,
         private readonly IssuanceSourceResolver $source,
-        private readonly IssuanceContext $context
+        private readonly IssuanceContext $context,
+        private readonly RuleResource $ruleResource
     ) {
     }
 
@@ -37,7 +39,8 @@ class CouponResourceSavePlugin
         $ruleId = (int)$object->getData('rule_id');
         $days = $this->context->getValidityDays($ruleId);
         if (!$this->context->hasRule($ruleId)) {
-            $rule = $this->ruleFactory->create()->load($ruleId);
+            $rule = $this->ruleFactory->create();
+            $this->ruleResource->load($rule, $ruleId);
             $days = (int)$rule->getData('magenable_coupon_validity_days');
         }
         if ($days === null || $days < 1) {
